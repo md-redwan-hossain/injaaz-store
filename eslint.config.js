@@ -12,15 +12,14 @@ export default tseslint.config([
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
-      js.configs.recommended,
       ...tseslint.configs.recommendedTypeChecked,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
       reactDom.configs.recommended,
       reactHooks.configs["recommended-latest"],
-      reactRefresh.configs.vite
+      reactRefresh.configs.vite,
+      js.configs.recommended
     ],
     languageOptions: {
       ecmaVersion: 2020,

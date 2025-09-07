@@ -1,8 +1,7 @@
-import { use } from "react";
-import { ThemeContext } from "./contexts";
+import { useThemeContext } from "../hooks/useThemeContext";
 
 export function Toolbar() {
-  const theme = use(ThemeContext);
+  const theme = useThemeContext();
 
   return (
     <div style={{ background: theme === "light" ? "white" : "black" }}>
