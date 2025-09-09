@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useFormSubmitWithPreventDefault } from "../hooks/useFormSubmit";
+import { useFormSubmit } from "../hooks/useFormSubmit";
 
 const ContactFormModelSchema = z.object({
   fullName: z.string().min(2, "Too Small"),
@@ -17,7 +17,7 @@ export function ContactForm() {
     mode: "onChange"
   });
 
-  const handleFormSubmit = useFormSubmitWithPreventDefault(form.handleSubmit, (data) => {
+  const handleFormSubmit = useFormSubmit(form.handleSubmit, (data) => {
     console.log(data);
   });
 
@@ -31,7 +31,16 @@ export function ContactForm() {
             <p>{form.formState.errors.fullName.message}</p>
           )}
         </div>
-        <button type="submit">Submit</button>
+        <div>
+          <label htmlFor="email">Email</label>
+          <input {...form.register("email")} />
+          {form.formState.errors.email && form.formState.touchedFields.email && (
+            <p>{form.formState.errors.email.message}</p>
+          )}
+        </div>
+        <button disabled={!form.formState.isValid} type="submit">
+          Submit
+        </button>
       </form>
     </>
   );
